@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<contentList>
+	<content contentuid="hc87cee881fbb4861b1f93fbd2e039a1131e5" version="1">Long Rest</content>
+	<content contentuid="h73e9cf8849d34ecda41d3e7976cff3b71fbe" version="1">Short Rest</content>
+	<content contentuid="he874ba4c59e143ed8c4d3785c59e9baf614c" version="1">Turns required to reset 'per Long Rest' cooldowns. 1 turn in combat is equal to 6 seconds out of combat.</content>
+	<content contentuid="h0cef559a30244dd8aa3bfca732f63fba12cg" version="1">Turns required to reset 'per Short Rest' cooldowns.</content>
+	<content contentuid="hcf9429081ab849e7ab3385e2d985bfbb6964" version="1">Enable Regeneration</content>
+	<content contentuid="h269b008330d04c329acc2f2d1a3a994960ge" version="1">Enable or disable the regeneration functions.&lt;br&gt; If enabled, you can still disable individual settings by setting the turn timer to 0.&lt;br&gt; One turn in combat is equal to 6 seconds out of combat.</content>
+	<content contentuid="h26345964c2904270ae5e6e293656b9d452c3" version="1">Enable regeneration during combat.</content>
+	<content contentuid="h0f30154b1b92453d8d3d57147985108a35eb" version="1">Enable regeneration out of combat.</content>
+	<content contentuid="hcbee81e4598e4de986b20ce6d79a9e1682b4" version="1">Combat Regeneration</content>
+	<content contentuid="hadd8e8a3d8704755a5b6e30267995002g414" version="1">Out of Combat Regeneration</content>
+	<content contentuid="h8969059267ee4ad0986e5d95ab1e396deee7" version="1">Modded Resources</content>
+	<content contentuid="h3166b0b4fc5e41b4908b0b305df98d31cb0d" version="1">Open modded regen settings</content>
+	<content contentuid="hbde969b89bcc4879bfff93a4800707bbdg9e" version="1">Enable or disable the regeneration functions.&lt;br&gt;If enabled, you can still disable individual settings by setting the turn timer to 0.&lt;br&gt;One turn in combat is equal to 6 seconds out of combat.</content>
+	<content contentuid="hc87cee881fbb4861b1f93fbd2e039a1131e5" version="1">Long Rest</content>
+	<content contentuid="h73e9cf8849d34ecda41d3e7976cff3b71fbe" version="1">Short Rest</content>
+	<content contentuid="he874ba4c59e143ed8c4d3785c59e9baf614c" version="1">Turns required to reset 'per Long Rest' cooldowns. 1 turn in combat is equal to 6 seconds out of combat.</content>
+	<content contentuid="h0cef559a30244dd8aa3bfca732f63fba12cg" version="1">Turns required to reset 'per Short Rest' cooldowns.</content>
+	<content contentuid="hcf9429081ab849e7ab3385e2d985bfbb6964" version="1">Enable Regeneration</content>
+	<content contentuid="h269b008330d04c329acc2f2d1a3a994960ge" version="1">Enable or disable the regeneration functions.&lt;br&gt; If enabled, you can still disable individual settings by setting the turn timer to 0.&lt;br&gt; One turn in combat is equal to 6 seconds out of combat.</content>
+	<content contentuid="h26345964c2904270ae5e6e293656b9d452c3" version="1">Enable regeneration during combat.</content>
+	<content contentuid="h0f30154b1b92453d8d3d57147985108a35eb" version="1">Enable regeneration out of combat.</content>
+	<content contentuid="hcbee81e4598e4de986b20ce6d79a9e1682b4" version="1">Combat Regeneration</content>
+	<content contentuid="hadd8e8a3d8704755a5b6e30267995002g414" version="1">Out of Combat Regeneration</content>
+	<content contentuid="h8969059267ee4ad0986e5d95ab1e396deee7" version="1">Modded Resources</content>
+	<content contentuid="h3166b0b4fc5e41b4908b0b305df98d31cb0d" version="1">Open modded regen settings</content>
+	<content contentuid="hbde969b89bcc4879bfff93a4800707bbdg9e" version="1">Enable or disable the regeneration functions.&lt;br&gt;If enabled, you can still disable individual settings by setting the turn timer to 0.&lt;br&gt;One turn in combat is equal to 6 seconds out of combat.</content>
+</contentList>

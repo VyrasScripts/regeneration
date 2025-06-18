@@ -1,0 +1,13 @@
+new entry "REGENLONG"
+type "StatusData"
+data "StatusType" "BOOST"
+data "Instant" "Yes"
+data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog;DisablePortraitIndicator"
+data "OnApplyFunctors" "ResetCooldowns(UntilRest);ResetCooldowns(UntilRestPerItem);"
+
+new entry "REGENSHORT"
+type "StatusData"
+data "StatusType" "BOOST"
+data "Instant" "Yes"
+data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog;DisablePortraitIndicator"
+data "OnApplyFunctors" "ResetCooldowns(UntilShortRest);ResetCooldowns(UntilShortRestPerItem);"

@@ -1,0 +1,2017 @@
+{
+    "SchemaVersion": 1,
+    "ModName": "Regeneration",
+    "Tabs": [
+        {
+            "TabId": "enable_regeneration",
+            "TabName": "General",
+            "Sections": [
+                {
+                    "SectionId": "gen",
+                    "SectionName": "General Settings",
+                    "Settings": [
+                        {
+                            "Id": "RegenerationButton",
+                            "Name": "Enable Regeneration",
+                            "Type": "checkbox",
+                            "Default": true,
+                            "Description": "Enable or disable the regeneration functions.\nIf enabled, you can still disable individual settings by setting the turn timer to 0.\nOne turn in combat is equal to 6 seconds out of combat.",
+                            "Handles": {
+                                "NameHandle": "hcf9429081ab849e7ab3385e2d985bfbb6964",
+                                "DescriptionHandle": "hbde969b89bcc4879bfff93a4800707bbdg9e"
+                            }
+                        },
+                        {
+                            "Id": "MaxRegeneration",
+                            "Name": "Fully Restore Resources",
+                            "Type": "checkbox",
+                            "Default": false,
+                            "Description": "If enabled, all enabled resources will be fully restored instead of regenerating gradually based on their configured turn values."
+                        },
+                        {
+                            "Id": "OutofCombatRegen",
+                            "Name": "Out of Combat Regeneration",
+                            "Type": "checkbox",
+                            "Default": true,
+                            "Description": "Enable regeneration out of combat.",
+                            "Handles": {
+                                "NameHandle": "hadd8e8a3d8704755a5b6e30267995002g414",
+                                "DescriptionHandle": "h0f30154b1b92453d8d3d57147985108a35eb"
+                            },
+                            "VisibleIf": {
+                                "Conditions": [{
+                                    "SettingId": "RegenerationButton",
+                                    "ExpectedValue": "true",
+                                    "Operator": "=="
+                                }]
+                            }
+                        },
+                        {
+                            "Id": "CombatRegen",
+                            "Name": "Combat Regeneration",
+                            "Type": "checkbox",
+                            "Default": false,
+                            "Description": "Enable regeneration during combat.",
+                            "Handles": {
+                                "NameHandle": "hcbee81e4598e4de986b20ce6d79a9e1682b4",
+                                "DescriptionHandle": "h26345964c2904270ae5e6e293656b9d452c3"
+                            },
+                            "VisibleIf": {
+                                "Conditions": [{
+                                    "SettingId": "RegenerationButton",
+                                    "ExpectedValue": "true",
+                                    "Operator": "=="
+                                }]
+                            }
+                        },
+                        {
+                            "Id": "DebugMode",
+                            "Name": "Enable Debug Logging",
+                            "Type": "checkbox",
+                            "Default": false,
+                            "Description": "Enabling will log regeneration events to the console for debugging purposes."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "TabId": "general_settings",
+            "TabName": "Rest Abilities",
+            "Sections": [
+                {
+                    "SectionId": "rest_abilities",
+                    "SectionName": "Rest Abilities Settings",
+                    "Settings": [
+                        {
+                            "Id": "LongRest",
+                            "Name": "Long Rest",
+                            "Type": "slider_int",
+                            "Default": 15,
+                            "Description": "Turns required to reset 'per Long Rest' cooldowns.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "Handles": {
+                                "NameHandle": "hc87cee881fbb4861b1f93fbd2e039a1131e5",
+                                "DescriptionHandle": "he874ba4c59e143ed8c4d3785c59e9baf614c"
+                            }
+                        },
+                        {
+                            "Id": "ShortRest",
+                            "Name": "Short Rest",
+                            "Type": "slider_int",
+                            "Default": 10,
+                            "Description": "Turns required to reset 'per Short Rest' cooldowns.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "Handles": {
+                                "NameHandle": "h73e9cf8849d34ecda41d3e7976cff3b71fbe",
+                                "DescriptionHandle": "h0cef559a30244dd8aa3bfca732f63fba12cg"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "TabId": "resource_regeneration",
+            "TabName": "Vanilla Resources",
+            "Sections": [
+                {
+                    "SectionId": "vanilla_resources",
+                    "SectionName": "Vanilla Resources Settings",
+                    "Settings": [
+                        {
+                            "Id": "SuperiorityDie",
+                            "Name": "Superiority Die",
+                            "Type": "slider_int",
+                            "Default": 5,
+                            "Tooltip": "Turns required to regenerate a Superiority Die.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "ChannelDivinity",
+                            "Name": "Channel Divinity",
+                            "Type": "slider_int",
+                            "Default": 5,
+                            "Tooltip": "Turns required to regenerate Channel Divinity.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "Rage",
+                            "Name": "Rage",
+                            "Type": "slider_int",
+                            "Default": 5,
+                            "Tooltip": "Turns required to regenerate Rage.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "BardicInspiration",
+                            "Name": "Bardic Inspiration",
+                            "Type": "slider_int",
+                            "Default": 5,
+                            "Tooltip": "Turns required to regenerate Bardic Inspiration.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "KiPoint",
+                            "Name": "Ki Point",
+                            "Type": "slider_int",
+                            "Default": 5,
+                            "Tooltip": "Turns required to regenerate a Ki Point.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "WildShape",
+                            "Name": "Wild Shape",
+                            "Type": "slider_int",
+                            "Default": 5,
+                            "Tooltip": "Turns required to regenerate Wild Shape.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "StarMapPoint",
+                            "Name": "Star Map Point Regeneration Rate",
+                            "Tooltip": "Turns required to regenerate Star Map Point",
+                            "Type": "slider_int",
+                            "Default": 5,
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "CosmicOmen",
+                            "Name": "Cosmic Omen Regeneration Rate",
+                            "Tooltip": "Turns required to regenerate Cosmic Omen",
+                            "Type": "slider_int",
+                            "Default": 5,
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "ChannelOath",
+                            "Name": "Channel Oath",
+                            "Type": "slider_int",
+                            "Default": 5,
+                            "Tooltip": "Turns required to regenerate Channel Oath.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "LayOnHandsCharge",
+                            "Name": "Lay on Hands Charge",
+                            "Type": "slider_int",
+                            "Default": 5,
+                            "Tooltip": "Turns required to regenerate Lay on Hands Charge.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "FungalInfestationCharge",
+                            "Name": "Fungal Infestation Charge",
+                            "Type": "slider_int",
+                            "Default": 5,
+                            "Tooltip": "Turns required to regenerate Fungal Infestation Charge.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "LuckPoint",
+                            "Name": "Luck Point",
+                            "Type": "slider_int",
+                            "Default": 5,
+                            "Tooltip": "Turns required to regenerate a Luck Point.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "ArcaneRecoveryPoint",
+                            "Name": "Arcane Recovery Point",
+                            "Type": "slider_int",
+                            "Default": 5,
+                            "Tooltip": "Turns required to regenerate an Arcane Recovery Point.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "NaturalRecoveryPoint",
+                            "Name": "Natural Recovery Point",
+                            "Type": "slider_int",
+                            "Default": 5,
+                            "Tooltip": "Turns required to regenerate a Natural Recovery Point.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "SorceryPoint",
+                            "Name": "Sorcery Point",
+                            "Type": "slider_int",
+                            "Default": 5,
+                            "Tooltip": "Turns required to regenerate a Sorcery Point.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "TidesOfChaos",
+                            "Name": "Tides of Chaos",
+                            "Type": "slider_int",
+                            "Default": 8,
+                            "Tooltip": "Turns required to regenerate Tides of Chaos.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "WarPriestActionPoint",
+                            "Name": "War Priest Action Point",
+                            "Type": "slider_int",
+                            "Default": 5,
+                            "Tooltip": "Turns required to regenerate a War Priest Action Point.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "ArcaneShot",
+                            "Name": "Arcane Shot",
+                            "Type": "slider_int",
+                            "Default": 5,
+                            "Tooltip": "Turns required to regenerate Arcane Shot.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "Bladesong",
+                            "Name": "Bladesong Regeneration Rate",
+                            "Tooltip": "Turns required to regenerate Bladesong",
+                            "Type": "slider_int",
+                            "Default": 5,
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "WrithingTidePoint",
+                            "Name": "Writhing Currents Regeneration Rate",
+                            "Tooltip": "Turns required to regenerate Writhing Currents",
+                            "Type": "slider_int",
+                            "Default": 5,
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "Interrupt_LuckOfTheFarRealms_Charge",
+                            "Name": "Ilithid Luck of The Far Realms Reaction Charge",
+                            "Type": "slider_int",
+                            "Default": 30,
+                            "Tooltip": "Turns required to reenable Luck Of The Far Realms reaction.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "Interrupt_EntropicWard_Charge",
+                            "Name": "Warlock's Great Old One's Entropic Ward Reaction Charge",
+                            "Type": "slider_int",
+                            "Default": 30,
+                            "Tooltip": "Turns required to reenable Entropic Ward reaction.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "TabId": "modded",
+            "TabName": "Modded Resources",
+            "Sections": [
+                {
+                    "SectionId": "5e_fighter",
+                    "SectionName": "5e Fighter Subclasses (Mod Author: Sumradagnoth)",
+                    "Settings": [
+                        {
+                            "Id": "5e_fighter_rune_knight_show_resources",
+                            "Name": "Display Rune Knight Resources",
+                            "Type": "checkbox",
+                            "Default": false,
+                            "Description": "Enable to view and customize Rune Knight resource settings."
+                        },
+                        {
+                            "Id": "GiantMightUse",
+                            "Name": "Giant Might Regeneration Rate",
+                            "Description": "Turns required to regenerate Giant Might",
+                            "Type": "slider_int",
+                            "Default": 1,
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [{
+                                    "SettingId": "5e_fighter_rune_knight_show_resources",
+                                    "ExpectedValue": "true",
+                                    "Operator": "=="
+                                }]
+                            }
+                        },
+                        {
+                            "Id": "CloudRuneUse",
+                            "Name": "Cloud Rune Regeneration Rate",
+                            "Description": "Turns required to regenerate Cloud Runes",
+                            "Type": "slider_int",
+                            "Default": 1,
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [{
+                                    "SettingId": "5e_fighter_rune_knight_show_resources",
+                                    "ExpectedValue": "true",
+                                    "Operator": "=="
+                                }]
+                            }
+                        },
+                        {
+                            "Id": "FrostRuneUse",
+                            "Name": "Frost Rune Regeneration Rate",
+                            "Description": "Turns required to regenerate Frost Runes",
+                            "Type": "slider_int",
+                            "Default": 1,
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [{
+                                    "SettingId": "5e_fighter_rune_knight_show_resources",
+                                    "ExpectedValue": "true",
+                                    "Operator": "=="
+                                }]
+                            }
+                        },
+                        {
+                            "Id": "HillRuneUse",
+                            "Name": "Hill Rune Regeneration Rate",
+                            "Description": "Turns required to regenerate Hill Runes",
+                            "Type": "slider_int",
+                            "Default": 1,
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [{
+                                    "SettingId": "5e_fighter_rune_knight_show_resources",
+                                    "ExpectedValue": "true",
+                                    "Operator": "=="
+                                }]
+                            }
+                        },
+                        {
+                            "Id": "StormRuneUse",
+                            "Name": "Storm Rune Regeneration Rate",
+                            "Description": "Turns required to regenerate Storm Runes",
+                            "Type": "slider_int",
+                            "Default": 1,
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [{
+                                    "SettingId": "5e_fighter_rune_knight_show_resources",
+                                    "ExpectedValue": "true",
+                                    "Operator": "=="
+                                }]
+                            }
+                        },
+                        {
+                            "Id": "StoneRuneUse",
+                            "Name": "Stone Rune Regeneration Rate",
+                            "Description": "Turns required to regenerate Stone Runes",
+                            "Type": "slider_int",
+                            "Default": 1,
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [{
+                                    "SettingId": "5e_fighter_rune_knight_show_resources",
+                                    "ExpectedValue": "true",
+                                    "Operator": "=="
+                                }]
+                            }
+                        },
+                        {
+                            "Id": "5e_fighter_psi_warrior_show_resources",
+                            "Name": "Display Psi Warrior Resources",
+                            "Type": "checkbox",
+                            "Default": false,
+                            "Description": "Enable to view and customize Psi Warrior resource settings."
+                        },
+                        {
+                            "Id": "PsionicEnergyDice",
+                            "Name": "Pisonic Energy Dice Regeneration Rate",
+                            "Description": "Turns required to regenerate Psionic Energy Dice",
+                            "Type": "slider_int",
+                            "Default": 1,
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "5e_fighter_psi_warrior_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "Id": "5e_fighter_cavalier_show_resources",
+                            "Name": "Display Cavalier Resources",
+                            "Type": "checkbox",
+                            "Default": false,
+                            "Description": "Enable to view and customize Cavalier resource settings."
+                        },
+                        {
+                            "Id": "UnwaveringMarkAttack",
+                            "Name": "Unwavering Mark Regeneration Rate",
+                            "Description": "Turns required to regenerate Unwavering Marks",
+                            "Type": "slider_int",
+                            "Default": 1,
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "5e_fighter_cavalier_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "Id": "WardingManeuverUse",
+                            "Name": "Warding Maneuver Regeneration Rate",
+                            "Description": "Turns required to regenerate Warding Maneuvers",
+                            "Type": "slider_int",
+                            "Default": 1,
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "5e_fighter_cavalier_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "SectionId": "blackguard",
+                    "SectionName": "Blackguard Class (Mod Author: xarara)",
+                    "Settings": [
+                        {
+                            "Id": "blackguard_show_resources",
+                            "Name": "Display Blackguard Resources",
+                            "Type": "checkbox",
+                            "Default": false,
+                            "Description": "Enable to view and customize Blackguard resource settings."
+                        },
+                        {
+                            "Id": "DarknessWithinPoint",
+                            "Name": "Darkness Within",
+                            "Type": "slider_int",
+                            "Default": 0,
+                            "Description": "Turns required to regenerate Darkness Within",
+                            "Tooltip": "Turns per Darkness Within Slot",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "blackguard_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "Id": "DisruptiveTouchPoint",
+                            "Name": "Disruptive Touch",
+                            "Type": "slider_int",
+                            "Default": 0,
+                            "Description": "Turns required to regenerate Disruptive Touch",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "blackguard_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                                {
+                    "SectionId": "bloodhunter",
+                    "SectionName": "Blood Hunter Class (Mod Author: Wolfe)",
+                    "Settings": [
+                        {
+                            "Id": "bloodhunter_show_resources",
+                            "Name": "Display Blood Hunter Resources",
+                            "Type": "checkbox",
+                            "Default": false,
+                            "Description": "Enable to view and customize Blood Hunter resource settings."
+                        },
+                        {
+                            "Id": "BloodMaledict",
+                            "Name": "Blood Maledict",
+                            "Type": "slider_int",
+                            "Default": 0,
+                            "Description": "Turns required to regenerate Blood Maledict",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "bloodhunter_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "Id": "HybridTransformation",
+                            "Name": "Hybrid Transformation",
+                            "Type": "slider_int",
+                            "Default": 0,
+                            "Description": "Turns required to regenerate Hybrid Transformation",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "bloodhunter_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "Id": "BrandOfCastigation",
+                            "Name": "Brand Of Castigation",
+                            "Type": "slider_int",
+                            "Default": 0,
+                            "Description": "Turns required to regenerate Brand Of Castigation",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "bloodhunter_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "SectionId": "chimerist",
+                    "SectionName": "Chimerist Class (Mod Author: DragonWild909)",
+                    "Settings": [
+                        {
+                            "Id": "chimerist_show_resources",
+                            "Name": "Display Chimerist Resources",
+                            "Type": "checkbox",
+                            "Default": false,
+                            "Description": "Enable to view and customize Chimerist resource settings."
+                        },
+                        {
+                            "Id": "MutationCharge",
+                            "Name": "Mutation Charge",
+                            "Type": "slider_int",
+                            "Default": 0,
+                            "Description": "Turns required to regenerate Mutation Charges",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "chimerist_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "Id": "GeneglyphGates",
+                            "Name": "Geneglyph Gates",
+                            "Type": "slider_int",
+                            "Default": 0,
+                            "Description": "Turns required to regenerate Geneglyph Gates",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "chimerist_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "SectionId": "conjurer",
+                    "SectionName": "The Conjurer (Mod Author: Orhyne1985)",
+                    "Settings": [
+                        {
+                            "Id": "conjurer_show_resources",
+                            "Name": "Display Conjurer Resources",
+                            "Type": "checkbox",
+                            "Default": false,
+                            "Description": "Enable to view and customize Conjurer resource settings."
+                        },
+                        {
+                            "Id": "SoulPoint_Conjurer",
+                            "Name": "Soul Point Regeneration Rate",
+                            "Type": "slider_int",
+                            "Default": 1,
+                            "Description": "Turns required to regenerate Soul Points",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "conjurer_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "SectionId": "elementalist",
+                    "SectionName": "Elementalist Class (Mod Author: Avyre)",
+                    "Settings": [
+                        {
+                            "Id": "elementalist_show_resources",
+                            "Name": "Display Elementalist Resources",
+                            "Type": "checkbox",
+                            "Default": false,
+                            "Description": "Enable to view and customize Elementalist resource settings."
+                        },
+                        {
+                            "Id": "ElementalSpark",
+                            "Name": "Elemental Spark Regeneration Rate",
+                            "Type": "slider_int",
+                            "Default": 1,
+                            "Description": "Turns required to regenerate Elemental Sparks",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "elementalist_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "SectionId": "faerie_knight",
+                    "SectionName": "Faerie Knight (Mod Author: Proloe)",
+                    "Settings": [
+                        {
+                            "Id": "faerie_knight_show_resources",
+                            "Name": "Display Faerie Knight Resources",
+                            "Type": "checkbox",
+                            "Default": false,
+                            "Description": "Enable to view and customize Faerie Knight resource settings."
+                        },
+                        {
+                            "Id": "FaerieKnight_FaerieFavor",
+                            "Name": "Faerie Favor Regeneration Rate",
+                            "Type": "slider_int",
+                            "Default": 1,
+                            "Description": "Turns required to regenerate Faerie Favor",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "faerie_knight_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "SectionId": "gloom_weaver",
+                    "SectionName": "Gloom Weaver Class (Mod Author: Highly-Curious)",
+                    "Settings": [
+                        {
+                            "Id": "gloom_weaver_show_resources",
+                            "Name": "Display Gloom Weaver Resources",
+                            "Type": "checkbox",
+                            "Default": false,
+                            "Description": "Enable to view and customize Gloom Weaver resource settings."
+                        },
+                        {
+                            "Id": "HCGWGloomweaverSpellSlot",
+                            "Name": "Gloom Weaver Spell Slot Regeneration Rate (All Levels)",
+                            "Description": "Turns required to regenerate Gloom Weaver Spell Slots",
+                            "Type": "slider_int",
+                            "Default": 1,
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "gloom_weaver_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "SectionId": "gravity_sorcerer",
+                    "SectionName": "Gravity Sorcerer (Mod Author: Acre_2)",
+                    "Settings": [
+                        {
+                            "Id": "gravity_sorcerer_show_resources",
+                            "Name": "Display Gravity Sorcerer Resources",
+                            "Type": "checkbox",
+                            "Default": false,
+                            "Description": "Enable to view and customize Gravity Sorcerer resource settings."
+                        },
+                        {
+                            "Id": "Gravity_Charge",
+                            "Name": "Gravity Charge Regeneration Rate",
+                            "Description": "Turns required to regenerate Gravity Charges",
+                            "Type": "slider_int",
+                            "Default": 1,
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "gravity_sorcerer_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "SectionId": "lunar_sorcerer",
+                    "SectionName": "Lunar Sorcerer (Mod Author: Havsglimt)",
+                    "Settings": [
+                        {
+                            "Id": "lunar_sorcerer_show_resources",
+                            "Name": "Display Lunar Sorcerer Resources",
+                            "Type": "checkbox",
+                            "Default": false,
+                            "Description": "Enable to view and customize Lunar Sorcerer resource settings."
+                        },
+                        {
+                            "Id": "LunarBoonsResource",
+                            "Name": "Lunar Boons Regeneration Rate",
+                            "Description": "Turns required to regenerate Lunar Boons",
+                            "Type": "slider_int",
+                            "Default": 1,
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "lunar_sorcerer_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "Id": "ShieldFullMoonResource",
+                            "Name": "Full Moon Shield Regeneration Rate",
+                            "Description": "Turns required to regenerate Full Moon Shield",
+                            "Type": "slider_int",
+                            "Default": 1,
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "lunar_sorcerer_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "SectionId": "mindweaver",
+                    "SectionName": "Mind Weaver Class (Mod Author: zx10rx)",
+                    "Settings": [
+                        {
+                            "Id": "mindweaver_show_resources",
+                            "Name": "Display Mind Weaver Resources",
+                            "Type": "checkbox",
+                            "Default": false,
+                            "Description": "Enable to view and customize Mind Weaver resource settings."
+                        },
+                        {
+                            "Id": "AnomalySuppressionCharge",
+                            "Name": "Anomaly Suppression Charge Regeneration Rate",
+                            "Type": "slider_int",
+                            "Default": 1,
+                            "Description": "Turns required to regenerate Anomaly Suppression Charges.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "mindweaver_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "Id": "DimensionalAmbushCharge",
+                            "Name": "Dimensional Ambush Charge Regeneration Rate",
+                            "Type": "slider_int",
+                            "Default": 1,
+                            "Description": "Turns required to regenerate Dimensional Ambush Charges.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "mindweaver_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "Id": "MindSurge",
+                            "Name": "Mind Surge Regeneration Rate",
+                            "Type": "slider_int",
+                            "Default": 1,
+                            "Description": "Turns required to regenerate Mind Surge.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "mindweaver_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "Id": "SoulEssence",
+                            "Name": "Soul Essence Regeneration Rate",
+                            "Type": "slider_int",
+                            "Default": 1,
+                            "Description": "Turns required to regenerate Soul Essence.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "mindweaver_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "SectionId": "mystic",
+                    "SectionName": "Mystic Class",
+                    "Settings": [
+                        {
+                            "Id": "mystic_show_resources",
+                            "Name": "Display Mystic Resources",
+                            "Type": "checkbox",
+                            "Default": false,
+                            "Description": "Enable to view and customize Mystic resource settings."
+                        },
+                        {
+                            "Id": "PsiPoints",
+                            "Name": "Psi Points",
+                            "Type": "slider_int",
+                            "Default": 0,
+                            "Description": "Turns required to regenerate Psi Points",
+                            "Tooltip": "Turns per Psi Point Slot",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "mystic_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "Id": "PsiLimit",
+                            "Name": "Psi Limit",
+                            "Type": "slider_int",
+                            "Default": 0,
+                            "Description": "Turns required to regenerate Psi Limit",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "mystic_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "Id": "PsionicStrike",
+                            "Name": "Psionic Strike",
+                            "Type": "slider_int",
+                            "Default": 0,
+                            "Description": "Turns required to regenerate Psionic Strike",
+                            "Tooltip": "Turns per Psionic Strike Slot",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "mystic_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "Id": "PsionicSurge",
+                            "Name": "Psionic Surge",
+                            "Type": "slider_int",
+                            "Default": 0,
+                            "Description": "Turns required to regenerate Psionic Surge",
+                            "Tooltip": "Turns per Psionic Surge Slot",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "mystic_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "Id": "SurgeOfHealth",
+                            "Name": "Surge of Health",
+                            "Type": "slider_int",
+                            "Default": 0,
+                            "Description": "Turns required to regenerate Surge of Health",
+                            "Tooltip": "Turns per Surge of Health Slot",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "mystic_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "Id": "MemoryOfOneThousandSteps",
+                            "Name": "Memory of One Thousand Steps",
+                            "Type": "slider_int",
+                            "Default": 0,
+                            "Description": "Turns required to regenerate Memory of One Thousand Steps",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "mystic_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "Id": "PsionicMastery",
+                            "Name": "Psionic Mastery",
+                            "Type": "slider_int",
+                            "Default": 0,
+                            "Description": "Turns required to regenerate Psionic Mastery",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "mystic_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "Id": "PsionicMasteryCooldown",
+                            "Name": "Psionic Mastery Cooldown",
+                            "Type": "slider_int",
+                            "Default": 0,
+                            "Description": "Turns required to regenerate Psionic Mastery Cooldown",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "mystic_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "SectionId": "path_of_the_skull_collector",
+                    "SectionName": "Path of the Skull Collector (Mod Authors: almontys & _Tomfoolery_)",
+                    "Settings": [
+                        {
+                            "Id": "skull_collector_show_resources",
+                            "Name": "Display Skull Collector Resources",
+                            "Type": "checkbox",
+                            "Default": false,
+                            "Description": "Enable to view and customize Path of the Skull Collector resource settings."
+                        },
+                        {
+                            "Id": "SC_SoulEssence",
+                            "Name": "Soul Essence Regeneration Rate",
+                            "Description": "Turns required to regenerate Soul Essence",
+                            "Type": "slider_int",
+                            "Default": 1,
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "skull_collector_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "Id": "SC_InfernalEmber",
+                            "Name": "Infernal Ember Regeneration Rate",
+                            "Description": "Turns required to regenerate Infernal Ember",
+                            "Type": "slider_int",
+                            "Default": 1,
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "skull_collector_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "Id": "SC_SpectralFlame",
+                            "Name": "Spectral Flame Regeneration Rate",
+                            "Description": "Turns required to regenerate Spectral Flame",
+                            "Type": "slider_int",
+                            "Default": 1,
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "skull_collector_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "SectionId": "spellsword",
+                    "SectionName": "Spellsword Class (Mod Author: Gawesome)",
+                    "Settings": [
+                        {
+                            "Id": "spellsword_show_resources",
+                            "Name": "Display Spellsword Resources",
+                            "Type": "checkbox",
+                            "Default": false,
+                            "Description": "Enable to view and customize Spellsword resource settings."
+                        },
+                        {
+                            "Id": "BladeDashResource",
+                            "Name": "Eldritch Points",
+                            "Type": "slider_int",
+                            "Default": 0,
+                            "Description": "Turns required to regenerate Eldritch Points",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "spellsword_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "SectionId": "succubus",
+                    "SectionName": "Succubus Class (Mod Author: Eclip5e_)",
+                    "Settings": [
+                        {
+                            "Id": "succubus_show_resources",
+                            "Name": "Display Succubus Resources",
+                            "Type": "checkbox",
+                            "Default": false,
+                            "Description": "Enable to view and customize Succubus resource settings."
+                        },
+                        {
+                            "Id": "DesirePoint",
+                            "Name": "Desire Regeneration Rate",
+                            "Type": "slider_int",
+                            "Default": 1,
+                            "Description": "Turns required to regenerate Desire",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "succubus_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "SectionId": "starblade",
+                    "SectionName": "5e Starblade Class (Mod Author: Eclip5e_)",
+                    "Settings": [
+                        {
+                            "Id": "starblade_show_resources",
+                            "Name": "Display Starblade Resources",
+                            "Type": "checkbox",
+                            "Default": false,
+                            "Description": "Enable to view and customize Starblade resource settings."
+                        },
+                        {
+                            "Id": "StarbladeDie",
+                            "Name": "Starblade Die Regeneration Rate",
+                            "Type": "slider_int",
+                            "Default": 1,
+                            "Description": "Turns required to regenerate Starblade Die",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "starblade_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "SectionId": "wardancer",
+                    "SectionName": "Wardancer Class (Mod Author: Eclip5e_)",
+                    "Settings": [
+                        {
+                            "Id": "wardancer_show_resources",
+                            "Name": "Display Wardancer Resources",
+                            "Type": "checkbox",
+                            "Default": false,
+                            "Description": "Enable to view and customize Wardancer resource settings."
+                        },
+                        {
+                            "Id": "Flow",
+                            "Name": "Flow Regeneration Rate",
+                            "Type": "slider_int",
+                            "Default": 1,
+                            "Description": "Turns required to regenerate Flow",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "wardancer_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "SectionId": "white_mage",
+                    "SectionName": "FFXIV White Mage (Mod Author: SpluciaStarlight)",
+                    "Settings": [
+                        {
+                            "Id": "white_mage_show_resources",
+                            "Name": "Display White Mage Resources",
+                            "Type": "checkbox",
+                            "Default": false,
+                            "Description": "Enable to view and customize White Mage resource settings."
+                        },
+                        {
+                            "Id": "AetherResourceWhm",
+                            "Name": "Aether Regeneration Rate",
+                            "Type": "slider_int",
+                            "Default": 1,
+                            "Description": "Turns required to regenerate Aether",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "white_mage_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "Id": "LiliesResourceWhm",
+                            "Name": "Lilies Regeneration Rate",
+                            "Tooltip": "Turns required to regenerate Lilies",
+                            "Type": "slider_int",
+                            "Default": 1,
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "white_mage_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "Id": "BloodLilyResourceWhm",
+                            "Name": "Blood Lily Regeneration Rate",
+                            "Description": "Turns required to regenerate Blood Lily",
+                            "Type": "slider_int",
+                            "Default": 1,
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "white_mage_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "SectionId": "spell_points",
+                    "SectionName": "Spell Points Overhaul",
+                    "Settings": [
+                        {
+                            "Id": "spell_points_show_resources",
+                            "Name": "Display Spell Points Resources",
+                            "Type": "checkbox",
+                            "Default": false,
+                            "Description": "Enable to view and customize Spell Points resource settings."
+                        },
+                        {
+                            "Id": "SpellPointsResource",
+                            "Name": "Spell Points Resource",
+                            "Type": "slider_int",
+                            "Default": 5,
+                            "Description": "Turns required to regenerate a Spell Points Resource",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "spell_points_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "SectionId": "undead",
+                    "SectionName": "Undead Race",
+                    "Settings": [
+                        {
+                            "Id": "undead_show_resources",
+                            "Name": "Display Undead Resources",
+                            "Type": "checkbox",
+                            "Default": false,
+                            "Description": "Enable to view and customize Undead resource settings."
+                        },
+                        {
+                            "Id": "MarkPoints",
+                            "Name": "Mark Points",
+                            "Type": "slider_int",
+                            "Default": 0,
+                            "Description": "Turns required to regenerate Mark Points",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "undead_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "Id": "ProfaneSlots",
+                            "Name": "Profane Slots",
+                            "Type": "slider_int",
+                            "Default": 0,
+                            "Description": "Turns required to regenerate Profane Slots",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "undead_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "SectionId": "shaman",
+                    "SectionName": "Shaman Class",
+                    "Settings": [
+                        {
+                            "Id": "shaman_show_resources",
+                            "Name": "Display Shaman Resources",
+                            "Type": "checkbox",
+                            "Default": false,
+                            "Description": "Enable to view and customize Shaman resource settings."
+                        },
+                        {
+                            "Id": "SB_ShamanSpellSlot",
+                            "Name": "Shaman Spell Slot",
+                            "Type": "slider_int",
+                            "Default": 5,
+                            "Description": "Turns required to regenerate a Shaman Spell Slot",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "shaman_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "Id": "SB_Shaman_EvilEyeCharge",
+                            "Name": "Shaman Evil Eye Charge",
+                            "Type": "slider_int",
+                            "Default": 8,
+                            "Description": "Turns required to regenerate a Shaman Evil Eye Charge",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "shaman_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "Id": "SB_Shaman_LifeCharge",
+                            "Name": "Shaman Life Charge",
+                            "Type": "slider_int",
+                            "Default": 10,
+                            "Description": "Turns required to regenerate a Shaman Life Charge",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            },
+                            "VisibleIf": {
+                                "Conditions": [
+                                    {
+                                        "SettingId": "shaman_show_resources",
+                                        "Operator": "==",
+                                        "ExpectedValue": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "TabId": "spell_slots_regeneration",
+            "TabName": "Spellslots",
+            "Sections": [
+                {
+                    "SectionId": "spell_slots",
+                    "SectionName": "Spell Slots Settings",
+                    "Settings": [
+                        {
+                            "Id": "SpellSlotsLvl1",
+                            "Name": "Spell Slots Level 1",
+                            "Type": "slider_int",
+                            "Default": 3,
+                            "Tooltip": "Turns required to regenerate a level 1 spell slot.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "SpellSlotsLvl2",
+                            "Name": "Spell Slots Level 2",
+                            "Type": "slider_int",
+                            "Default": 6,
+                            "Tooltip": "Turns required to regenerate a level 2 spell slot.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "SpellSlotsLvl3",
+                            "Name": "Spell Slots Level 3",
+                            "Type": "slider_int",
+                            "Default": 9,
+                            "Tooltip": "Turns required to regenerate a level 3 spell slot.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "SpellSlotsLvl4",
+                            "Name": "Spell Slots Level 4",
+                            "Type": "slider_int",
+                            "Default": 12,
+                            "Tooltip": "Turns required to regenerate a level 4 spell slot.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "SpellSlotsLvl5",
+                            "Name": "Spell Slots Level 5",
+                            "Type": "slider_int",
+                            "Default": 15,
+                            "Tooltip": "Turns required to regenerate a level 5 spell slot.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "SpellSlotsLvl6",
+                            "Name": "Spell Slots Level 6",
+                            "Type": "slider_int",
+                            "Default": 18,
+                            "Tooltip": "Turns required to regenerate a level 6 spell slot.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "SpellSlotsLvl7",
+                            "Name": "Spell Slots Level 7",
+                            "Type": "slider_int",
+                            "Default": 21,
+                            "Tooltip": "Turns required to regenerate a level 7 spell slot.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "SpellSlotsLvl8",
+                            "Name": "Spell Slots Level 8",
+                            "Type": "slider_int",
+                            "Default": 24,
+                            "Tooltip": "Turns required to regenerate a level 8 spell slot.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "SpellSlotsLvl9",
+                            "Name": "Spell Slots Level 9",
+                            "Type": "slider_int",
+                            "Default": 30,
+                            "Tooltip": "Turns required to regenerate a level 9 spell slot.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+        ,
+        {
+            "TabId": "warlock_spell_slots_regeneration",
+            "TabName": "Warlock Spellslots",
+            "Sections": [
+                {
+                    "SectionId": "warlock_spell_slots",
+                    "SectionName": "Warlock Spell Slots Settings",
+                    "Settings": [
+                        {
+                            "Id": "WarlockSpellSlotsLvl1",
+                            "Name": "Warlock Spell Slots Level 1",
+                            "Type": "slider_int",
+                            "Default": 3,
+                            "Tooltip": "Turns required to regenerate a level 1 warlock spell slot.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "WarlockSpellSlotsLvl2",
+                            "Name": "Warlock Spell Slots Level 2",
+                            "Type": "slider_int",
+                            "Default": 6,
+                            "Tooltip": "Turns required to regenerate a level 2 warlock spell slot.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "WarlockSpellSlotsLvl3",
+                            "Name": "Warlock Spell Slots Level 3",
+                            "Type": "slider_int",
+                            "Default": 9,
+                            "Tooltip": "Turns required to regenerate a level 3 warlock spell slot.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "WarlockSpellSlotsLvl4",
+                            "Name": "Warlock Spell Slots Level 4",
+                            "Type": "slider_int",
+                            "Default": 12,
+                            "Tooltip": "Turns required to regenerate a level 4 warlock spell slot.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "WarlockSpellSlotsLvl5",
+                            "Name": "Warlock Spell Slots Level 5",
+                            "Type": "slider_int",
+                            "Default": 15,
+                            "Tooltip": "Turns required to regenerate a level 5 warlock spell slot.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "WarlockSpellSlotsLvl6",
+                            "Name": "Warlock Spell Slots Level 6",
+                            "Type": "slider_int",
+                            "Default": 18,
+                            "Tooltip": "Turns required to regenerate a level 6 warlock spell slot.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "WarlockSpellSlotsLvl7",
+                            "Name": "Warlock Spell Slots Level 7",
+                            "Type": "slider_int",
+                            "Default": 21,
+                            "Tooltip": "Turns required to regenerate a level 7 warlock spell slot.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "WarlockSpellSlotsLvl8",
+                            "Name": "Warlock Spell Slots Level 8",
+                            "Type": "slider_int",
+                            "Default": 24,
+                            "Tooltip": "Turns required to regenerate a level 8 warlock spell slot.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "WarlockSpellSlotsLvl9",
+                            "Name": "Warlock Spell Slots Level 9",
+                            "Type": "slider_int",
+                            "Default": 30,
+                            "Tooltip": "Turns required to regenerate a level 9 warlock spell slot.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+        ,
+        {
+            "TabId": "shadow_spell_slots_regeneration",
+            "TabName": "Shadow Spellslots",
+            "Sections": [
+                {
+                    "SectionId": "shadow_spell_slots",
+                    "SectionName": "Shadow Spell Slots Settings",
+                    "Settings": [
+                        {
+                            "Id": "ShadowSpellSlotsLvl1",
+                            "Name": "Shadow Spell Slots Level 1",
+                            "Type": "slider_int",
+                            "Default": 3,
+                            "Tooltip": "Turns required to regenerate a level 1 shadow spell slot.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "ShadowSpellSlotsLvl2",
+                            "Name": "Shadow Spell Slots Level 2",
+                            "Type": "slider_int",
+                            "Default": 6,
+                            "Tooltip": "Turns required to regenerate a level 2 shadow spell slot.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "ShadowSpellSlotsLvl3",
+                            "Name": "Shadow Spell Slots Level 3",
+                            "Type": "slider_int",
+                            "Default": 9,
+                            "Tooltip": "Turns required to regenerate a level 3 shadow spell slot.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "ShadowSpellSlotsLvl4",
+                            "Name": "Shadow Spell Slots Level 4",
+                            "Type": "slider_int",
+                            "Default": 12,
+                            "Tooltip": "Turns required to regenerate a level 4 shadow spell slot.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "ShadowSpellSlotsLvl5",
+                            "Name": "Shadow Spell Slots Level 5",
+                            "Type": "slider_int",
+                            "Default": 15,
+                            "Tooltip": "Turns required to regenerate a level 5 shadow spell slot.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "ShadowSpellSlotsLvl6",
+                            "Name": "Shadow Spell Slots Level 6",
+                            "Type": "slider_int",
+                            "Default": 18,
+                            "Tooltip": "Turns required to regenerate a level 6 shadow spell slot.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "ShadowSpellSlotsLvl7",
+                            "Name": "Shadow Spell Slots Level 7",
+                            "Type": "slider_int",
+                            "Default": 21,
+                            "Tooltip": "Turns required to regenerate a level 7 shadow spell slot.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "ShadowSpellSlotsLvl8",
+                            "Name": "Shadow Spell Slots Level 8",
+                            "Type": "slider_int",
+                            "Default": 24,
+                            "Tooltip": "Turns required to regenerate a level 8 shadow spell slot.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        },
+                        {
+                            "Id": "ShadowSpellSlotsLvl9",
+                            "Name": "Shadow Spell Slots Level 9",
+                            "Type": "slider_int",
+                            "Default": 30,
+                            "Tooltip": "Turns required to regenerate a level 9 shadow spell slot.",
+                            "Options": {
+                                "Min": 0,
+                                "Max": 1200
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+
