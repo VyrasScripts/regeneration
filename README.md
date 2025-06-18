@@ -1,5 +1,9 @@
-Features:
-- !inspectAllCharsResources
-- !giveResourceXToChar <ResourceName> <optional, character> => example !giveResourceXToChar ActionPoint
-- !resetLongRestCooldowns <optional, any string> <optional, character> => example !resetLongRestCooldowns will reenable everything on the character currently in control that has a "Long Rest" cooldown.
-- !resetShortRestCooldowns (same as above)
+# Script Extender Commands:
+### !inspectAllCharsResources
+- Displays all current resources for every character.
+### !giveResourceXToChar
+- Usage Example: !giveResourceXToChar ActionPoint
+### !resetLongRestCooldowns
+- Resets all features and abilities on the controlled character that normally recharge on a Long Rest.
+### !resetShortRestCooldowns
+- Resets all features and abilities on the controlled character that normally recharge on a Short Rest.
